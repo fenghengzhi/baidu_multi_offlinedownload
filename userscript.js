@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name         百度批量离线
 // @namespace    https://greasyfork.org/users/63665
-// @version      0.5
+// @version      0.6
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/*
 // @match        http://yun.baidu.com/disk/*
+// @match        https://pan.baidu.com/disk/*
+// @match        https://yun.baidu.com/disk/*
 // @grant        none
 // @run-at      document-end
 // @require     https://code.jquery.com/jquery-3.1.0.min.js
