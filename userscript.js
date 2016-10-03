@@ -1,7 +1,8 @@
 // ==UserScript==
-// @name         百度批量离线
+// @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
-// @version      0.6
+// @homepage     https://greasyfork.org/zh-CN/scripts/23426
+// @version      0.7
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/*
