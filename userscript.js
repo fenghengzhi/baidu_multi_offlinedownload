@@ -2,7 +2,7 @@
 // @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
 // @homepage     https://greasyfork.org/zh-CN/scripts/23426
-// @version      0.9
+// @version      1.0
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/home*
@@ -33,7 +33,7 @@
         });
 
         //创建一个弹出层
-        msgObj=$("#offlinelist-dialog").clone().appendTo('body');
+        var msgObj=$("#offlinelist-dialog").clone().appendTo('body');
         msgObj.attr('id','mul-dialog');
         msgObj.css('z-index','1001');
 
@@ -74,15 +74,22 @@
             bgObj.remove();
             msgObj.remove();
         });
-        msgObj.find('.select-text').text(title);
-        msgObj.css('width',w);
-        dialogbody=msgObj.find('.dialog-body');
+
+
+        var dialogbody=msgObj.find('.dialog-body');
         dialogbody.children().remove();
-        mullineinputbox=$("<textarea/>").attr("id","multi_urls").appendTo(dialogbody);
-        mullineinputbox.css('width','95%').css('height','100px').css('border-radius','4px').css('border','1px solid rgb(196,196,196)');
+        var table1=$('<table/>').appendTo(dialogbody).width('100%');
+        var tr1=$('<tr/>').appendTo(table1);
+        var td1=$('<td colspan="2"/>').appendTo(tr1).width('100%').css('padding','10px');
+        var mullineinputbox=$("<textarea/>").attr("id","multi_urls").appendTo(td1);
+        mullineinputbox.css('width','100%').css('height','100px').css('border-radius','4px').css('border','1px solid rgb(196,196,196)');
         $('head').append("<style>textarea:focus{border:1px solid rgb(192, 217, 255);}</style>");
         dialogbody.css('text-align','center');
-        button1=$('<button/>');
+        tr1=$('<tr/>').insertAfter(tr1);
+        td1=$('<td/>').appendTo(tr1).css('padding-bottom','15px');
+        var td2=$('<td/>').insertAfter(td1).css('padding-bottom','15px');
+        var button1=$('<button/>');
+        button1.attr('class','mul-button');
         button1.css({
             'width':'104px',
             'height':'34px',
@@ -92,17 +99,13 @@
             'outline':'none',
             'cursor':'pointer'
         });
-        button2=button1.clone();
+        var button2=button1.clone();
         button1.css('background-color',"rgb(59, 140, 255)").css('color','rgb(255,255,255)').text('确定');
         button2.css('border','1px solid rgb(192, 217, 255)').css('background-color',"rgb(255,255,255)").css('color','rgb(59, 140, 255)').text('关闭');
-        $('head').append("<style>button:hover{opacity:0.7;}</style>");
+        $('head').append("<style>button.mul-button:hover{opacity:0.7;}</style>");
 
-        mullineinputbox.after(button1);
-        button1.after(button2);
-        mullineinputbox.before('<br>').after('<br>').after('<br>');
-        button1.after(' ');
-        button2.after('<br>');
-        button2.after('<br>');
+        td1.append(button1);
+        td2.append(button2);
         button1.click(function(){
             urls=$("#multi_urls").val().split("\n");
             button2.click();
@@ -112,6 +115,12 @@
         button2.click(function() {
             bgObj.remove();
             msgObj.remove();
+        });
+        msgObj.find('.select-text').text(title);
+        msgObj.css('width',w);
+        msgObj.css({
+            'left':bgObj.width()/2-msgObj.width()/2,
+            'top':bgObj.height()/2-msgObj.height()/2
         });
 
     }
@@ -133,15 +142,16 @@
 
     //'use strict'
     $(document).one("click","span:contains('离线下载')[class='text']",add_multi_button);
+    //$(document).one("click","#multi_download",function(){alert('test');});
 
 
 
 
-    window.Multi_offline=function(urls){
+    function Multi_offline(urls){
         $('#_disk_id_2').click();
         i=0;
         offline_download();
-    };
+    }
     function offline_download(){
         $("#_disk_id_2").click();//点击新建按钮
         wait_newoffline_dialog();
