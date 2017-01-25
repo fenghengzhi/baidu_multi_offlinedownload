@@ -2,7 +2,7 @@
 // @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
 // @homepage     https://greasyfork.org/zh-CN/scripts/23426
-// @version      1.0
+// @version      1.1
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/home*
@@ -127,7 +127,7 @@
     function add_multi_button(){
         if($("#offlinelist-dialog").css("display")!="block") return setTimeout(arguments.callee,100);
         //$("#offlinelist-dialog").find(".dialog-control").children().click();//点击关闭按钮
-        if($("#offlinelist-dialog").find("span:contains('批量离线')[class='text']").length===0){
+        if($("#offlinelist-dialog").find("span.text:contains('批量离线')").length===0){
             $("#offlinelist-dialog").css('width','720px');
             var old_button=$("#_disk_id_2");
             var new_button=old_button.clone();
@@ -141,8 +141,7 @@
     }
 
     //'use strict'
-    $(document).one("click","span:contains('离线下载')[class='text']",add_multi_button);
-    //$(document).one("click","#multi_download",function(){alert('test');});
+    $(document).one("click","a.g-button:contains('离线下载')",add_multi_button);
 
 
 
