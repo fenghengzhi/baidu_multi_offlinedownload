@@ -2,7 +2,7 @@
 // @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
 // @homepage     https://greasyfork.org/zh-CN/scripts/23426
-// @version      1.1
+// @version      1.2
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/home*
@@ -10,12 +10,11 @@
 // @match        https://pan.baidu.com/disk/home*
 // @match        https://yun.baidu.com/disk/home*
 // @grant        none
-// @run-at      document-end
-// @require     https://code.jquery.com/jquery-3.1.0.min.js
-// @note        v0.2 好用多了，就是有点难看 v0.5简单美化 v0.9大幅更新界面
+// @run-at       document-end
+// @require      https://code.jquery.com/jquery-3.2.1.min.js
+// @note         v1.2小幅优化
 // ==/UserScript==
 (function() {
-
     var urls;
     var i;
     function alertWin(title, msg, w, h) {
@@ -109,7 +108,7 @@
         button1.click(function(){
             urls=$("#multi_urls").val().split("\n");
             button2.click();
-            Multi_offline();
+            Multi_offline_start();
             console.debug(urls);
         });
         button2.click(function() {
@@ -125,7 +124,7 @@
 
     }
     function add_multi_button(){
-        if($("#offlinelist-dialog").css("display")!="block") return setTimeout(arguments.callee,100);
+        if($("#offlinelist-dialog").is(":visible")===false) return setTimeout(arguments.callee,100);
         //$("#offlinelist-dialog").find(".dialog-control").children().click();//点击关闭按钮
         if($("#offlinelist-dialog").find("span.text:contains('批量离线')").length===0){
             $("#offlinelist-dialog").css('width','720px');
@@ -146,39 +145,43 @@
 
 
 
-    function Multi_offline(urls){
-        $('#_disk_id_2').click();
-        i=0;
-        offline_download();
+    function Multi_offline_start(){
+        //$("#_disk_id_2").click();
+        i=0;//清空计数器
+        offline_download();//进入循环
     }
     function offline_download(){
         $("#_disk_id_2").click();//点击新建按钮
         wait_newoffline_dialog();
     }
     function wait_newoffline_dialog(){//等待新建窗口
-        if($("#newoffline-dialog").css("display")!="block") return setTimeout(arguments.callee,1000);
+        if($("#newoffline-dialog").is(":visible")===false) return setTimeout(arguments.callee,100);
         $("#share-offline-link").val(urls[i]);
         $("#newoffline-dialog").find("span:contains('确定')[class='text']").click();//确定按钮
         check_code();
     }
 
     function check_code(){
-        if($("#offlinelist-dialog").css("display")!="block" && $("#dialog1").css("display")!="block") return setTimeout(arguments.callee,100);
-        if($("#dialog1").css("display")=="block"){//弹出验证码
+        if($("#offlinelist-dialog").is(":visible")===false && $("#dialog1").is(":visible")===false) return setTimeout(arguments.callee,100);
+        if($("#dialog1").is(":visible")){//弹出验证码
             wait_checkcode_input();
         }
-        else  wait_complete();//没有弹出验证码
+        else if($("#offlinelist-dialog").is(":visible")) wait_complete();//没有弹出验证码
+        else alert('error');
     }
     function wait_checkcode_input(){
         $("#dialog1").find(".input-code").focus();
-        if($("#dialog1").find(".input-code").val().length!=4) return setTimeout(arguments.callee,100);
-        $("#dialog1").find("span:contains('确定')[class='text']").click();
-        check_code();
+        $("#dialog1").find(".input-code").on('input',function(){
+            if(this.value.length===4){
+                $("#dialog1").find("span:contains('确定')[class='text']").click();
+                check_code();
+            }
+        });
     }
     function wait_complete(){
-        if($("#offlinelist-dialog").css("display")!="block") return setTimeout(arguments.callee,1000);
-        i++;
-        if(i>=urls.length) return;//批量下载完成，脚本结束
-        else offline_download();
+        if($("#offlinelist-dialog").is(":visible")===false) return setTimeout(arguments.callee,100);
+        ++i;
+        if(i<urls.length) offline_download();//继续批量下载
+        //if条件为假，则批量下载完成，脚本结束
     }
 })();
