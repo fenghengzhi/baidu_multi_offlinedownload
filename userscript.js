@@ -2,7 +2,7 @@
 // @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
 // @homepage     https://greasyfork.org/zh-CN/scripts/23426
-// @version      1.2
+// @version      1.3
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/home*
@@ -32,7 +32,7 @@ function sleep(ms) {
 }
 function alertWin(title, msg, w, h) {
     //背景层
-    let bgObj = $(`<divstyle="position:absolute;left:0;top:0;width:100%;height:100%;opacity:0.3;background-color:#000;z-index:1000;"></div>`).appendTo('body');
+    let bgObj = $(`<div style="position:absolute;left:0;top:0;width:100%;height:100%;opacity:0.3;background-color:#000;z-index:1000;"></div>`).appendTo('body');
 
 
     //创建一个弹出层
@@ -87,11 +87,11 @@ function alertWin(title, msg, w, h) {
     let mullineinputbox = $('<textarea id="multi_urls" style="width:100%;height:100px;border-radius:4px;border:1px solid rgb(196,196,196)"></textarea>;').appendTo(td1);
     $('head').append("<style>textarea:focus{border:1px solid rgb(192, 217, 255);}</style>");
     dialogbody.css('text-align', 'center');
-    tr1 = $('<tr/>').insertAfter(tr1);
-    td1 = $('<td/>').appendTo(tr1).css('padding-bottom', '15px');
-    let td2 = $('<td/>').insertAfter(td1).css('padding-bottom', '15px');
-    let button1 = $('<button class="mul-button" style="width:104px;height:34px;border-radius:4px;border:none;outline:none;cursor:pointer;font:normal normal normal normal 13px / 32px 'Microsoft YaHei': SimSun;"></button>');
-    button1.attr('class', 'mul-button');
+    tr1 = $('<tr></tr>').insertAfter(tr1);
+    td1 = $('<td style="padding-bottom:15px;"></td>').appendTo(tr1);
+    let td2 = $('<td style="padding-bottom:15px;"></td>').insertAfter(td1);
+    let button1 = $(`<button class="mul-button" style="width:104px;height:34px;border-radius:4px;border:none;outline:none;cursor:pointer;font:normal normal normal normal 13px / 32px 'Microsoft YaHei': SimSun;"></button>`);
+
 
     let button2 = button1.clone();
     button1.css('background-color', "rgb(59, 140, 255)").css('color', 'rgb(255,255,255)').text('确定');
