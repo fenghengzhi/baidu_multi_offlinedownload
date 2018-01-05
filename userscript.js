@@ -2,7 +2,7 @@
 // @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
 // @homepage     https://greasyfork.org/zh-CN/scripts/23426
-// @version      1.3
+// @version      1.4
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/home*
@@ -121,20 +121,20 @@ function alertWin(title, msg, w, h) {
 async function add_multi_button() {
     while ($("#offlinelist-dialog").is(":visible") === false) await sleep(100);
     //$("#offlinelist-dialog").find(".dialog-control").children().click();//点击关闭按钮
-    if ($("#offlinelist-dialog span.text:contains('批量离线')").length === 0) {
-        $("#offlinelist-dialog").css('width', '720px');
+    if ($('#offlinelist-dialog span.text:contains(批量离线)').length === 0) {
+        $('#offlinelist-dialog').css('width', '720px');
         let old_button = $("#_disk_id_2");
         let new_button = old_button.clone();
-        new_button.find(".text").text("批量离线");
+        new_button.find('.text').text('批量离线');
         new_button.attr('id', 'multi_download');
         new_button.click(function () {
-            alertWin("输入链接", "", 500, 500);
+            alertWin('输入链接', '', 500, 500);
         });
         old_button.after(new_button);
     }
 }
 
-$('body').one("click", "a.g-button:contains('离线下载')", add_multi_button);
+$('body').one('click', 'a.g-button:contains(离线下载)', add_multi_button);
 
 
 
@@ -148,8 +148,8 @@ async function offline_download() {
     $("#_disk_id_2").click();//点击新建按钮
     //等待新建窗口
     while ($("#newoffline-dialog").is(":visible") === false) await sleep(100);
-    $("#share-offline-link").val(urls[i]);//输入一条url
-    $("#newoffline-dialog").find("span:contains('确定')[class='text']").click();//点击确定按钮
+    $('#share-offline-link').val(urls[i]);//输入一条url
+    $('#newoffline-dialog').find('span.text:contains(确定)').click();//点击确定按钮
     check_code();
 }
 
@@ -167,20 +167,20 @@ function wait_checkcode_input() {
     $("#dialog1 .input-code").focus();
     $("#dialog1 .input-code").on('input', function () {
         if (this.value.length === 4) {
-            $("#dialog1").find("span.text:contains('确定')").click();
+            $('#dialog1').find('span.text:contains(确定)').click();
             check_code();
         }
     });
 }
 async function wait_complete() {
-    while ($("#offlinelist-dialog").is(":visible") === false) await sleep(100);
+    while ($('#offlinelist-dialog').is(':visible') === false) await sleep(100);
     ++i;
     if (i < urls.length) offline_download();//继续批量下载
     //if条件为假，则批量下载完成，脚本结束
 }
 /* jshint ignore:start */
 ]]></>).toString();
-let c = Babel.transform(inline_src, { presets: ["es2015", "es2016", "es2017"] });
+let c = Babel.transform(inline_src, { presets: ['es2015', 'es2016', 'es2017'] });
 console.log(c);
 eval(c.code);
 /* jshint ignore:end */
