@@ -2,7 +2,7 @@
 // @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
 // @homepage     https://greasyfork.org/zh-CN/scripts/23426
-// @version      1.4
+// @version      1.5
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/home*
@@ -13,7 +13,7 @@
 // @run-at       document-end
 // @require      https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js
-// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @note         v1.3使用es7改进代码，优化代码阅读逻辑 v1.2小幅优化
 // ==/UserScript==
 /* jshint ignore:start */
@@ -145,7 +145,7 @@ function Multi_offline_start() {
     offline_download();//进入循环
 }
 async function offline_download() {
-    $("#_disk_id_2").click();//点击新建按钮
+    $("a:contains(新建链接任务)").click();//点击新建按钮
     //等待新建窗口
     while ($("#newoffline-dialog").is(":visible") === false) await sleep(100);
     $('#share-offline-link').val(urls[i]);//输入一条url
