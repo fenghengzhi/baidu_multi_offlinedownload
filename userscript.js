@@ -11,10 +11,10 @@
 // @match        https://yun.baidu.com/disk/home*
 // @grant        none
 // @run-at       document-end
-// @require      https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js
-// @require      https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js
-// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js
-// @note         v1.3使用es7改进代码，优化代码阅读逻辑 v1.2小幅优化
+// @require      https://unpkg.com/babel-standalone/babel.min.js
+// @require      https://unpkg.com/babel-polyfill/dist/polyfill.min.js
+// @require      https://unpkg.com/jquery/dist/jquery.min.js
+// @note         v1.6改用unpkg的库，可自动使用最新版本
 // ==/UserScript==
 /* jshint ignore:start */
 var inline_src = (<><![CDATA[
