@@ -2,7 +2,7 @@
 // @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
 // @homepage     https://greasyfork.org/zh-CN/scripts/37905
-// @version      1.7
+// @version      1.8
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/home*
@@ -150,7 +150,7 @@ function Multi_offline_start() {
 }
 
 async function offline_download() {
-  $("a:contains(新建链接任务)").click();//点击新建按钮
+  $("span.text:contains(新建链接任务)").click();//点击新建按钮
   //等待新建窗口
   while ($("#newoffline-dialog").is(":visible") === false) await sleep(100);
   $('#share-offline-link').val(urls[i]);//输入一条url
