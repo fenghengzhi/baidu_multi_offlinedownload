@@ -2,7 +2,7 @@
 // @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
 // @homepage     https://greasyfork.org/zh-CN/scripts/37905
-// @version      1.8
+// @version      1.8.1
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/home*
@@ -124,7 +124,7 @@ function alertWin(title, msg, w, h) {
 
 }
 
-async function add_multi_button() {
+var add_multi_button = async function() {
   while ($("#offlinelist-dialog").is(":visible") === false) await sleep(100);
   //$("#offlinelist-dialog").find(".dialog-control").children().click();//点击关闭按钮
   if ($('#offlinelist-dialog span.text:contains(批量离线)').length === 0) {
