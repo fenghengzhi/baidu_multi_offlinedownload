@@ -19,7 +19,12 @@
 // @grant        GM_xmlhttpRequest
 // @grant        GM.xmlHttpRequest
 // ==/UserScript==
-var http=(GM&&GM.xmlHttpRequest)||GM_xmlhttpRequest;
+var http
+try{
+ http=GM_xmlhttpRequest;
+}catch(err){
+  http=GM.xmlHttpRequest;
+}
 var click=false; // 判断是否在脚本加载前点击离线下载按钮
 // console.log(http);
 function btnClick(){
