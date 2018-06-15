@@ -2,7 +2,7 @@
 // @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
 // @homepage     https://greasyfork.org/zh-CN/scripts/23426
-// @version      2.3
+// @version      2.4
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/home*
@@ -37,7 +37,7 @@ http({
     onload: function(response) {
         var src=response.responseText;
         //var c = Babel.transform(src, { presets: [['es2015',{strictMode:false}], 'es2016','es2017'],sourceType: 'script'});
-        var c = Babel.transform(src, { presets: [['env',{strictMode:false}]],sourceType: 'script'});
+        var c = Babel.transform(src, { presets: ['env'],sourceType: 'script'});
 
         console.log(c);
         $(function(){
