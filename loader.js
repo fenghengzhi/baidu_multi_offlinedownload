@@ -2,7 +2,7 @@
 // @name         百度网盘批量离线
 // @namespace    https://greasyfork.org/users/63665
 // @homepage     https://greasyfork.org/zh-CN/scripts/23426
-// @version      2.4
+// @version      2.5
 // @description  批量离线辅助脚本
 // @author       fenghengzhi
 // @match        http://pan.baidu.com/disk/home*
@@ -15,14 +15,15 @@
 // @require      https://unpkg.com/@babel/polyfill/dist/polyfill.min.js
 // @require      https://unpkg.com/jquery/dist/jquery.min.js
 // @note         2.2:解决离线下载过早点击批量离线按钮可能出不来的bug,更新babel到7
+// @note         2.5:改进脚本管理器xmlhttpRequest的判断方式
 // @connect      greasyfork.org
 // @grant        GM_xmlhttpRequest
 // @grant        GM.xmlHttpRequest
 // ==/UserScript==
 var http
-try{
+if(typeof GM_xmlhttpRequest!='undefined'){
  http=GM_xmlhttpRequest;
-}catch(err){
+}else{
   http=GM.xmlHttpRequest;
 }
 var click=false; // 判断是否在脚本加载前点击离线下载按钮
